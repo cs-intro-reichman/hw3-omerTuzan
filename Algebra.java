@@ -12,7 +12,7 @@ public class Algebra {
  		System.out.println(times(3,4));  // 3 * 4
    		System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
    		System.out.println(pow(5,3));      // 5^3
-   		System.out.println(pow(3,5));      // 3^5
+   		System.out.println(pow(30,5));      // 3^5
    		System.out.println(div(12,3));   // 12 / 3    
    		System.out.println(div(5,5));    // 5 / 5  
    		System.out.println(div(25,7));   // 25 / 7
@@ -25,43 +25,79 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int Sum = x1;
+		for (int i = 0; i < x2; i++){
+			Sum++;
+		}
+
+		return Sum;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
 		// Replace the following statement with your code
-		return 0;
+		int Sub = x1;
+		for (int i = 0; i < x2; i++){
+			Sub--;
+		}
+
+		return Sub;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int mul = 0;
+		for (int i = 0; i < x2 ; i++){
+			mul = plus(mul, x1);
+		}
+
+		return mul;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		int power = 1;
+		for (int i = 0; i < n ; i++){
+			power = times(power, x);
+		}
+		
+		return power;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
+		int divide = x1;
+		int amountDiv = 0;
+		while (divide >= x2){
+			amountDiv++;
+			divide = minus(divide, x2);
+		}
+
+		if (divide > 0) {return 0;}
+
 		// Replace the following statement with your code
-		return 0;
+		return amountDiv;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int module = x1;
+		if (div(x1, x2) >= 1) return 0;
+
+		while (module > x2){
+			module = minus(module, x2);
+		}
+
+		return module;
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
+		for (int i = 1; i <= x; i++){
+			if (pow(i, 2) > x){
+				return i - 1;
+			}
+		}
 		return 0;
 	}	  	  
 }

@@ -17,7 +17,7 @@ public class Anagram {
 		String str = "1234567";
 		Boolean pass = true;
 		//// 10 can be changed to much larger values, like 1000
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 1000; i++) {
 			String randomAnagram = randomAnagram(str);
 			System.out.println(randomAnagram);
 			pass = pass && isAnagram(str, randomAnagram);
@@ -28,22 +28,60 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
+		String upperStr1 = str1.toUpperCase();
+		String upperStr2 = str2.toUpperCase();
+
+		String charChecked = "";
+		for (int i = 0; i < upperStr1.length(); i++) {
+			char currChar = upperStr1.charAt(i);
+			if (charChecked.indexOf(currChar) != -1 || currChar == ' ') {continue;}
+			charChecked += currChar;
+
+			int countChar1 = 0;
+			int currIndex1 = upperStr1.indexOf(currChar); 
+			while (currIndex1 != -1) {
+				countChar1++;
+				currIndex1 = upperStr1.indexOf(currChar, currIndex1 + 1);
+			}
+
+			int countChar2 = 0;
+			int currIndex2 = upperStr2.indexOf(currChar); 
+			while (currIndex2 != -1) {
+				countChar2++;
+				currIndex2 = upperStr2.indexOf(currChar, currIndex2 + 1);
+			}
+
+
+			if (countChar1 != countChar2) {return false;}
+		}
 		// Replace the following statement with your code
-		return false;
+		return true;
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
+		String cutStr = "";
+		for (int i = 0; i < str.length(); i++) {
+			if (!Character.isLetter(str.charAt(i))) {continue;}
+			cutStr += str.charAt(i);
+		}
+		return cutStr.toLowerCase();
 	} 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		// Replace the following statement with your code
-		return "";
+		String randStr = "";
+		String copyStr = str;
+		while (!copyStr.isEmpty()){
+			int i = (int) (Math.random() * copyStr.length());
+			char chosenChar = copyStr.charAt(i);
+			randStr += chosenChar;
+			copyStr = copyStr.substring(0, i) + copyStr.substring(i + 1);
+		}
+		return randStr;
 	}
 }
