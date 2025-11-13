@@ -64,7 +64,7 @@ public class Anagram {
 	public static String preProcess(String str) {
 		String cutStr = "";
 		for (int i = 0; i < str.length(); i++) {
-			if (!Character.isLetter(str.charAt(i))) {continue;}
+			if (!Character.isLetter(str.charAt(i)) && !Character.isWhitespace(str.charAt(i))) {continue;}
 			cutStr += str.charAt(i);
 		}
 		return cutStr.toLowerCase();
