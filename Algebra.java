@@ -18,7 +18,7 @@ public class Algebra {
    		System.out.println(div(25,7));   // 25 / 7
    		System.out.println(mod(25,7));   // 25 % 7
    		System.out.println(mod(120,6));  // 120 % 6    
-   		System.out.println(sqrt(36));
+   		System.out.println(sqrt(136));
 		System.out.println(sqrt(263169));
    		System.out.println(sqrt(76123));
 	}  
@@ -28,17 +28,18 @@ public class Algebra {
 		int Sum = x1;
 
 		if (x2 < 0) {
-			// handles negative additive numbers in +
 			for (int i = x2; i < 0; i++){
 				Sum--;
 			}
 		} else {
-			// handles ragular positive numbers in + 
 			for (int i = 0; i < x2; i++){
 				Sum++;
 			}
 
 		}
+
+		
+
 		return Sum;
 	}
 
@@ -48,16 +49,17 @@ public class Algebra {
 		int Sub = x1;
 
 		if (x2 < 0) {
-			// handles negative subtracted numbers in -
 			for (int i = x2; i < 0; i++){
 				Sub++;
 			}
 		} else {
-			// handles positive subtracted numbers in -
 			for (int i = 0; i < x2; i++){
 				Sub--;
 			}
-		}
+	}
+		
+		
+
 		return Sub;
 	}
 
@@ -65,13 +67,11 @@ public class Algebra {
 	public static int times(int x1, int x2) {
 		int mul = 0;
 		if (x2 < 0) {
-			// handles negative multiplication numbers in *
 			for (int i = x2; i < 0 ; i++){
 				mul = minus(mul, x1);
 			}
 
 		} else {
-			// handles positive multiplication numbers in *
 			for (int i = 0; i < x2 ; i++){
 				mul = plus(mul, x1);
 			}
@@ -94,18 +94,11 @@ public class Algebra {
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		if (x2 == 0) {
-			throw new ArithmeticException("Cant devide by zero");
-		}
-
 		int divide = x1;
 		int amountDiv = 0;
-
 		if (x1 < 0) {
-			// handles dividing x1 if it is negative
 			while (divide < 0){
 				amountDiv++;
-				// handles the division calculation diffrently if x2 is negitive or positive
 				if (x2 < 0){
 					divide = minus(divide, x2);
 				} else {
@@ -114,10 +107,8 @@ public class Algebra {
 				if (divide > 0) {return 0;}
 			}
 		} else {
-			// handles dividing x1 if it is positive
 			while (divide > 0){
 				amountDiv++;
-				// handles the division calculation diffrently if x2 is negitive or positive
 				if (x2 < 0){
 					divide = plus(divide, x2);
 				} else {
@@ -127,7 +118,6 @@ public class Algebra {
 			if (divide < 0) {return 0;}
 		}
 		
-		// handles the amount of negative operators, since amountDiv is a counter and always positive, these steps will fix its type(negative|positive)
 		if (x1 < 0) {amountDiv = times(amountDiv, -1);}
 		if (x2 < 0) {amountDiv = times(amountDiv, -1);}
 
@@ -138,11 +128,8 @@ public class Algebra {
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
 		int module = x1;
+		if (div(x1, x2) >= 1) return 0;
 
-		// if a number is devided correctly it will return a number that is not 0, meaning it can be devided by x2
-		if (div(x1, x2) != 0) return 0;
-
-		// it just works :)))))))))))))
 		while (module > x2){
 			module = minus(module, x2);
 		}
@@ -153,11 +140,9 @@ public class Algebra {
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
 		for (int i = 1; i <= x; i++){
-			// not much to tell since x = s^2 than if we power by 2 all the numbers from 1 to s, lets call them i, by some point x will be lower than i^2, therefore the closest number was the one before
 			if (pow(i, 2) > x){
 				return i - 1;
 			}
-
 		}
 		return x;
 	}	  	  
